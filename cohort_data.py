@@ -23,6 +23,8 @@ def unique_houses(filename):
         if house != "":
             houses.add(house)
 
+    cohort_data.close()
+
     return houses
 
 
@@ -41,16 +43,35 @@ def sort_by_cohort(filename):
     """
 
     all_students = []
+
     winter_16 = []
     spring_16 = []
     summer_16 = []
     fall_15 = []
     ghosts = []
 
-    # Code goes here
+    cohort_data = open(filename)
 
+    for line in cohort_data:
+        line = line.rstrip()
+        info = line.split("|")
+        first_name, last_name, house, advisor, cohort = info
+        
+        if cohort == "Winter 2016":
+            winter_16.append(first_name + " " + last_name)
+        elif cohort == "Spring 2016":
+            spring_16.append(first_name + " " + last_name)
+        elif cohort == "Summer 2016":
+            summer_16.append(first_name + " " + last_name)
+        elif cohort == "Fall 2015":
+            fall_15.append(first_name + " " + last_name)
+        elif cohort == "G":
+            ghosts.append(first_name + " " + last_name)
+
+    all_students += [fall_15] + [winter_16] + [spring_16] + [summer_16] + [ghosts]
+
+    cohort_data.close()
     return all_students
-
 
 def hogwarts_by_house(filename):
     """TODO: Sort students into lists by house and return all lists in one list.
