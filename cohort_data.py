@@ -20,7 +20,8 @@ def unique_houses(filename):
         line = line.rstrip()
         fields = line.split("|")
         house = fields[2]
-        houses.add(house)
+        if house != "":
+            houses.add(house)
 
     return houses
 
