@@ -184,11 +184,15 @@ def find_cohort_by_student_name(student_list):
     'Student not found.'
 
     """
-
-    # Code goes here
+    which_student = input(" Who are you looking for? ")
+    
+    for student in student_list:
+        if which_student == student[0]:
+            return f"{student[0]} was in {student[3]} cohort."
 
     return "Student not found."
 
+# print(find_cohort_by_student_name(all_students_tuple_list("cohort_data.txt")))
 
 ##########################################################################################
 # Further Study Questions
