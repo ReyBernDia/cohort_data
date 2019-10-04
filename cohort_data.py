@@ -185,7 +185,7 @@ def find_cohort_by_student_name(student_list):
 
     """
     which_student = input(" Who are you looking for? ")
-    
+
     for student in student_list:
         if which_student == student[0]:
             return f"{student[0]} was in {student[3]} cohort."
@@ -212,7 +212,35 @@ def find_name_duplicates(filename):
 
     duplicate_names = set()
 
-    # Code goes here
+    cohort_data = open(filename)
+
+    winter_16 = set()
+    spring_16 = set()
+    summer_16 = set()
+    fall_15 = set()
+
+    #Iterate over the data
+    for line in cohort_data:
+        line = line.rstrip()
+        info = line.split("|")
+        first_name, last_name, house, advisor, cohort = info
+        
+        if cohort == "Winter 2016":
+            winter_16.add(last_name)
+        elif cohort == "Spring 2016":
+            spring_16.add(last_name)
+        elif cohort == "Summer 2016":
+            summer_16.add(last_name)
+        elif cohort == "Fall 2015":
+            fall_15.add(last_name)
+
+    #find any last names that exist across all cohorts
+
+    duplicate_names = winter_16 & spring_16 & summer_16 & fall_15
+
+    #Use set operations (set math) to create and return a set of these names
+
+    cohort_data.close()
 
     return duplicate_names
 
